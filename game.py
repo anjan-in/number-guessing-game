@@ -34,6 +34,18 @@ def save_high_score(score):
     with open("highscore.txt", "w") as file:
         file.write(str(score))
 
+def get_custom_range():
+    while True:
+        try:
+            min_num = int(input("Enter the minimum number for the range: "))
+            max_num = int(input("Enter the maximum number for the range: "))
+            if min_num >= max_num:
+                print("Invalid range. Minimum must be less than Maximum.")
+            else:
+                return min_num, max_num
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
+
 def number_guessing_game():
 
     score = 0
@@ -42,10 +54,13 @@ def number_guessing_game():
     print(f"\n🏆 Current High Score: {high_score} points")
 
     while True:
-        print("\n🎯 Welcome to the Enhanced Number Guessing Game!")
-        print("Think of a number between 1 and 100.")
+        print("\n🎯 Welcome to the Number Guessing Game!")
+        # print("Think of a number between 1 and 100.")
+
+        min_num, max_num = get_custom_range()
+        print(f"I've chosen a number between {min_num} and {max_num}. Try to guess it!")
         
-        number_to_guess = random.randint(1, 100)
+        number_to_guess = random.randint(min_num, max_num)
         max_attempts = choose_difficulty()
         attempts = 0
 
