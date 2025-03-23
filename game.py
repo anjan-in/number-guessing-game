@@ -1,4 +1,5 @@
 import random
+import os
 
 def choose_difficulty():
     print("\nChoose Difficulty Level: ")
@@ -20,9 +21,25 @@ def choose_difficulty():
         except ValueError:
             print("Invalid input. Please enter a number.")
 
+def load_high_score():
+    if os.path.exists("highscore.txt"):
+        with open("highscore.txt", "r") as file:
+            try:
+                return int(file.read().strip())
+            except ValueError:
+                return 0
+    return 0
+
+def save_high_score(score):
+    with open("highscore.txt", "w") as file:
+        file.write(str(score))
+
 def number_guessing_game():
 
     score = 0
+    high_score = load_high_score()
+
+    print(f"\n🏆 Current High Score: {high_score} points")
 
     while True:
         print("\n🎯 Welcome to the Enhanced Number Guessing Game!")
@@ -56,6 +73,12 @@ def number_guessing_game():
             score -= 5
 
         print(f"Your current score is: {score}")
+
+        # Update and Save High Score
+        if score > high_score:
+            print("🎊 New High Score! Congratulations!")
+            high_score = score
+            save_high_score(score)
 
         # Play Again Option
         play_again = input("Would you like to play again? (yes/no): ").strip().lower()
