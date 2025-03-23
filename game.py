@@ -21,9 +21,12 @@ def choose_difficulty():
             print("Invalid input. Please enter a number.")
 
 def number_guessing_game():
+
+    score = 0
+
     while True:
         print("\n🎯 Welcome to the Enhanced Number Guessing Game!")
-        print("I'm thinking of a number between 1 and 100.")
+        print("Think of a number between 1 and 100.")
         
         number_to_guess = random.randint(1, 100)
         max_attempts = choose_difficulty()
@@ -40,6 +43,7 @@ def number_guessing_game():
                     print("Too high! Try again.")
                 else:
                     print(f"🎉 Congratulations! You guessed it in {attempts} attempts.")
+                    score += 10
                     break
 
                 print(f"Attempts remaining: {max_attempts - attempts}")
@@ -49,11 +53,14 @@ def number_guessing_game():
         
         if attempts >= max_attempts:
             print(f"❗ Game Over! The correct number was {number_to_guess}.")
+            score -= 5
+
+        print(f"Your current score is: {score}")
 
         # Play Again Option
         play_again = input("Would you like to play again? (yes/no): ").strip().lower()
         if play_again != 'Y' and play_again != 'yes' and play_again != 'y':
-            print("Thanks for playing! Goodbye 👋")
+            print(f"\nFinal Score: {score} points. Thanks for playing! Goodbye 👋")
             break
 
 if __name__ == "__main__":
