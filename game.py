@@ -1,5 +1,6 @@
 import random
 import os
+import time
 
 def choose_difficulty():
     print("\nChoose Difficulty Level: ")
@@ -64,6 +65,9 @@ def number_guessing_game():
         max_attempts = choose_difficulty()
         attempts = 0
 
+        # Start Timer
+        start_time = time.time()
+
         while attempts < max_attempts:
             try:
                 guess = int(input("Take a guess: "))
@@ -74,7 +78,10 @@ def number_guessing_game():
                 elif guess > number_to_guess:
                     print("Too high! Try again.")
                 else:
+                    end_time = time.time()
+                    elapsed_time = round(end_time - start_time, 2)
                     print(f"🎉 Congratulations! You guessed it in {attempts} attempts.")
+                    print(f"⏱ Time Taken: {elapsed_time} seconds.")
                     score += 10
                     break
 
@@ -84,7 +91,10 @@ def number_guessing_game():
                 print("Invalid input. Please enter a number.")
         
         if attempts >= max_attempts:
+            end_time = time.time()
+            elapsed_time = round(end_time - start_time, 2)
             print(f"❗ Game Over! The correct number was {number_to_guess}.")
+            print(f"⏱ Time Taken: {elapsed_time} seconds.")
             score -= 5
 
         print(f"Your current score is: {score}")
