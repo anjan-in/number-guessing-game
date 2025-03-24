@@ -1,6 +1,10 @@
 import random
 import os
 import time
+from colorama import Fore, Style, init
+
+# Initialize Colorama for Windows
+init(autoreset = True)
 
 def choose_difficulty():
     print("\nChoose Difficulty Level: ")
@@ -10,7 +14,7 @@ def choose_difficulty():
     
     while True:
         try:
-            choice = int(input("Enter your choice (1/2/3): "))
+            choice = int(input(Fore.CYAN + "Enter your choice (1/2/3): "))
             if choice == 1:
                 return 10
             elif choice == 2:
@@ -18,9 +22,9 @@ def choose_difficulty():
             elif choice == 3:
                 return 5
             else:
-                print("Invalid choice. Please select 1, 2, or 3.")
+                print(Fore.RED + "Invalid choice. Please select 1, 2, or 3.")
         except ValueError:
-            print("Invalid input. Please enter a number.")
+            print(Fore.RED + "Invalid input. Please enter a number.")
 
 def load_high_score():
     if os.path.exists("highscore.txt"):
@@ -38,28 +42,28 @@ def save_high_score(score):
 def get_custom_range():
     while True:
         try:
-            min_num = int(input("Enter the minimum number for the range: "))
-            max_num = int(input("Enter the maximum number for the range: "))
+            min_num = int(input(Fore.MAGENTA + "Enter the minimum number for the range: "))
+            max_num = int(input(Fore.MAGENTA + "Enter the maximum number for the range: "))
             if min_num >= max_num:
-                print("Invalid range. Minimum must be less than Maximum.")
+                print(Fore.RED + "Invalid range. Minimum must be less than Maximum.")
             else:
                 return min_num, max_num
         except ValueError:
-            print("Invalid input. Please enter a valid number.")
+            print(Fore.RED + "Invalid input. Please enter a valid number.")
 
 def number_guessing_game():
 
     score = 0
     high_score = load_high_score()
 
-    print(f"\n🏆 Current High Score: {high_score} points")
+    print(Fore.YELLOW + f"\n🏆 Current High Score: {high_score} points")
 
     while True:
-        print("\n🎯 Welcome to the Number Guessing Game!")
+        print(Fore.CYAN + "\n🎯 Welcome to the Number Guessing Game!")
         # print("Think of a number between 1 and 100.")
 
         min_num, max_num = get_custom_range()
-        print(f"I've chosen a number between {min_num} and {max_num}. Try to guess it!")
+        print(Fore.CYAN + f"I've chosen a number between {min_num} and {max_num}. Try to guess it!")
         
         number_to_guess = random.randint(min_num, max_num)
         max_attempts = choose_difficulty()
@@ -74,41 +78,41 @@ def number_guessing_game():
                 attempts += 1
 
                 if guess < number_to_guess:
-                    print("Too low! Try again.")
+                    print(Fore.YELLOW + "Too low! Try again.")
                 elif guess > number_to_guess:
-                    print("Too high! Try again.")
+                    print(Fore.YELLOW + "Too high! Try again.")
                 else:
                     end_time = time.time()
                     elapsed_time = round(end_time - start_time, 2)
-                    print(f"🎉 Congratulations! You guessed it in {attempts} attempts.")
-                    print(f"⏱ Time Taken: {elapsed_time} seconds.")
+                    print(Fore.GREEN + f"🎉 Congratulations! You guessed it in {attempts} attempts.")
+                    print(Fore.GREEN + f"⏱ Time Taken: {elapsed_time} seconds.")
                     score += 10
                     break
 
-                print(f"Attempts remaining: {max_attempts - attempts}")
+                print(Fore.CYAN + f"Attempts remaining: {max_attempts - attempts}")
 
             except ValueError:
-                print("Invalid input. Please enter a number.")
+                print(Fore.RED + "Invalid input. Please enter a number.")
         
         if attempts >= max_attempts:
             end_time = time.time()
             elapsed_time = round(end_time - start_time, 2)
-            print(f"❗ Game Over! The correct number was {number_to_guess}.")
-            print(f"⏱ Time Taken: {elapsed_time} seconds.")
+            print(Fore.RED + f"❗ Game Over! The correct number was {number_to_guess}.")
+            print(Fore.RED + f"⏱ Time Taken: {elapsed_time} seconds.")
             score -= 5
 
-        print(f"Your current score is: {score}")
+        print(Fore.YELLOW + f"Your current score is: {score}")
 
         # Update and Save High Score
         if score > high_score:
-            print("🎊 New High Score! Congratulations!")
+            print(Fore.GREEN + "🎊 New High Score! Congratulations!")
             high_score = score
             save_high_score(score)
 
         # Play Again Option
         play_again = input("Would you like to play again? (yes/no): ").strip().lower()
         if play_again != 'Y' and play_again != 'yes' and play_again != 'y':
-            print(f"\nFinal Score: {score} points. Thanks for playing! Goodbye 👋")
+            print(Fore.YELLOW + f"\nFinal Score: {score} points. Thanks for playing! Goodbye 👋")
             break
 
 if __name__ == "__main__":
