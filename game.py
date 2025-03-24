@@ -1,10 +1,20 @@
 import random
 import os
 import time
+import pygame
 from colorama import Fore, Style, init
 
 # Initialize Colorama for Windows
 init(autoreset = True)
+
+# Initialize Pygame for Sound Effects
+pygame.mixer.init()
+
+def play_sound(sound_file):
+    try:
+        pygame.mixer.Sound(f"sounds/{sound_file}").play()
+    except Exception as e:
+        print(Fore.RED + f"Error playing sound: {e}")
 
 def choose_difficulty():
     print("\nChoose Difficulty Level: ")
@@ -86,6 +96,7 @@ def number_guessing_game():
                     elapsed_time = round(end_time - start_time, 2)
                     print(Fore.GREEN + f"🎉 Congratulations! You guessed it in {attempts} attempts.")
                     print(Fore.GREEN + f"⏱ Time Taken: {elapsed_time} seconds.")
+                    play_sound("win.wav")
                     score += 10
                     break
 
@@ -99,6 +110,7 @@ def number_guessing_game():
             elapsed_time = round(end_time - start_time, 2)
             print(Fore.RED + f"❗ Game Over! The correct number was {number_to_guess}.")
             print(Fore.RED + f"⏱ Time Taken: {elapsed_time} seconds.")
+            play_sound("lose.wav")
             score -= 5
 
         print(Fore.YELLOW + f"Your current score is: {score}")
@@ -107,6 +119,7 @@ def number_guessing_game():
         if score > high_score:
             print(Fore.GREEN + "🎊 New High Score! Congratulations!")
             high_score = score
+            play_sound("highscore.wav")
             save_high_score(score)
 
         # Play Again Option
