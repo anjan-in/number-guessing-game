@@ -130,3 +130,15 @@ def number_guessing_game():
 
 if __name__ == "__main__":
     number_guessing_game()
+
+
+def generate_number(min_num, max_num):
+    return random.randint(min_num, max_num)
+
+def check_guess(user_guess, actual_number):
+    if user_guess < actual_number:
+        return "too low"
+    elif user_guess > actual_number:
+        return "too high"
+    else:
+        return "correct"
