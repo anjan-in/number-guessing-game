@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: number-guessing-game
+    env: python
+    plan: free
+    buildCommand: ""
+    startCommand: "python app.py"
