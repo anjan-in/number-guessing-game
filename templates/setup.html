@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Setup Game - Number Guessing</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            margin: 1em;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        label {
+            font-weight: 500;
+            margin-top: 1rem;
+        }
+        .btn-play {
+            background-color: #6a11cb;
+            border: none;
+            padding: 10px 25px;
+            font-weight: bold;
+            border-radius: 30px;
+            transition: 0.3s;
+            color: white;
+            margin-top: 1.5rem;
+        }
+        .btn-play:hover {
+            background-color: #2575fc;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2 class="text-center">🛠 Game Setup</h2>
+        <form method="POST" action="{{ url_for('setup') }}">
+            <div class="mb-3">
+                <label for="player_name" class="form-label">Player Name:</label>
+                <input type="text" class="form-control" id="player_name" name="player_name" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="min_num" class="form-label">Minimum Number:</label>
+                <input type="number" class="form-control" id="min_num" name="min_num" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="max_num" class="form-label">Maximum Number:</label>
+                <input type="number" class="form-control" id="max_num" name="max_num" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="difficulty" class="form-label">Select Difficulty:</label>
+                <select class="form-select" id="difficulty" name="difficulty" required>
+                    <option value="easy">Easy (10 attempts)</option>
+                    <option value="medium">Medium (7 attempts)</option>
+                    <option value="hard">Hard (5 attempts)</option>
+                </select>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-play">🎮 Play Now</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

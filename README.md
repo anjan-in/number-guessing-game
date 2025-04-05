@@ -1,18 +1,40 @@
 # Number Guessing Game 🎯
 
-A simple Python game where users guess a randomly generated number within a specified range, enhanced with difficulty levels and attempt limits.
+This is a fun and interactive **Flask-based Number Guessing Game** where players can:
+- Set their name and difficulty level
+- Choose a number range
+- Try to guess the secret number within limited attempts
+- View a result screen and track previous scores
+
+---
 
 ## 🚀 Features
-- Difficulty Levels: Easy, Medium, Hard
-- Attempt Limit: Based on difficulty selection
-- Game Over Feedback: Shows the correct number if attempts run out
-- Interactive and Beginner Friendly
+
+- 🧠 Random number generation with difficulty levels
+- 👤 Personalized gameplay with player name
+- 📈 Score tracking and game history
+- 💡 Hints: Too High or Too Low
+- ✅ Input validations and game logic
+- 🎨 Responsive UI using Bootstrap
+- 📋 Unit testing with `pytest`
+
+---
 
 ## 🧑‍💻 Technologies Used
 - Python 3
 - Basic I/O
 - Random Module
 - Conditionals and Loops
+
+---
+
+## 📦 Dependencies
+- Flask
+- pytest
+- pytest-sugar (optional)
+- pytest-html (optional)
+
+---
 
 ## 📦 Prerequisites
 Ensure Python is installed. Check by running:
@@ -49,4 +71,9 @@ This project is licensed under the MIT License.
 
 ---
 
-**Created by [Anjan Sen](https://github.com/anjansen)**
+## 👨‍💻 Author
+Anjan Sen
+Frontend & UI/UX Developer | Python Learner
+**[GitHub](https://github.com/anjan-in)**
+
+**[Portfolio](https://github.com/anjan-in)**
