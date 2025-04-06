@@ -1,11 +1,17 @@
-from flask import Flask, render_template, request, redirect, session, url_for
+from flask import Flask, render_template, request, redirect, session, url_for, send_from_directory
 import random
 import time
+import os
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
 
 scoreboard = []
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+        '64X64.png', mimetype='image/png')
 
 @app.route('/')
 def index():
@@ -111,4 +117,6 @@ def reset():
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
+    # app.run(debug=True)
